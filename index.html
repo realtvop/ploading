@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>PLoading Sample</title>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="1000" height="200" style="border:1px solid #d3d3d3;"> Your browser does not support the
+        HTML5 canvas tag. </canvas>
+    <br />
+    Content:
+    <input id="cc" placeholder="[PLoading] realtvop is best!">
+    ID:
+    <input id="dd">
+    <input type="button" id="aa" value="l">
+    <input type="button" id="bb" value="r">
+    <script type="module">
+        import ploading from './ploading.js';
+        ploading.init(document.getElementById("myCanvas"));
+        document.getElementById("aa").addEventListener("click", () => {
+            ploading.l(document.getElementById("cc").value || document.getElementById("cc").placeholder, document.getElementById("dd").value);
+        });
+        document.getElementById("bb").addEventListener("click", () => {
+            ploading.r(document.getElementById("dd").value);
+        });
+    </script>
+</body>
+
+</html>
