@@ -8,22 +8,24 @@ const ploading = {
     ctx: null,
     startTime: 0,
     showing: false,
-    init(canvas) {
+    whenShow: () => "喵喵喵",
+    whenHide: () => "喵喵喵",
+    init(canvas, whenShow, whenHide) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
+        if (typeof whenShow === "function") this.whenShow = whenShow;
+        if (typeof whenHide === "function") this.whenHide = whenHide;
     },
     l(msg, id = 'default') {
         if (this.currentId) {
-            this.msg = msg;
+            this.show(msg);
             this.currentId = id;
-            this.showing = true;
         } else {
             let toDelay = false;
             const dow = () => {
                 if (toDelay && id !== this.delayed) return;
-                this.msg = msg;
+                this.show(msg);
                 this.currentId = id;
-                this.showing = true;
             };
             const now = new Date().getTime();
             if (now - this.lastOver <= 500) {
@@ -39,13 +41,22 @@ const ploading = {
     },
     r(id = 'default') {
         if (id === this.currentId) {
-            this.showing = false;
+            this.hide();
             this.lastOver = new Date().getTime();
             this.currentId = null;
         }
         if (id === this.delayed) {
             this.delayed = null;
         }
+    },
+    show(msg) {
+        this.msg = msg;
+        this.showing = true;
+        this.whenShow();
+    },
+    hide() {
+        this.showing = false;
+        this.whenHide();
     },
     qwq() {
         if (!ploading.showing || !ploading.canvas || !ploading.ctx) return;
