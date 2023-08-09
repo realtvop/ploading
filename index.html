@@ -17,8 +17,8 @@
     <input type="button" id="bb" value="r">
     <script type="module">
         import ploading from './ploading.js';
-        ploading.l(document.getElementById("cc").placeholder, document.getElementById("dd").placeholder);
         ploading.init(document.getElementById("myCanvas"));
+        ploading.l(document.getElementById("cc").placeholder, document.getElementById("dd").placeholder);
         document.getElementById("aa").addEventListener("click", () => {
             ploading.l(document.getElementById("cc").value || document.getElementById("cc").placeholder, document.getElementById("dd").value || document.getElementById("dd").placeholder);
         });
