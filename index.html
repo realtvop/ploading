@@ -12,17 +12,18 @@
     Content:
     <input id="cc" placeholder="[PLoading] realtvop is best!">
     ID:
-    <input id="dd">
+    <input id="dd" placeholder="sample">
     <input type="button" id="aa" value="l">
     <input type="button" id="bb" value="r">
     <script type="module">
         import ploading from './ploading.js';
+        ploading.l(document.getElementById("cc").placeholder, document.getElementById("dd").placeholder);
         ploading.init(document.getElementById("myCanvas"));
         document.getElementById("aa").addEventListener("click", () => {
-            ploading.l(document.getElementById("cc").value || document.getElementById("cc").placeholder, document.getElementById("dd").value);
+            ploading.l(document.getElementById("cc").value || document.getElementById("cc").placeholder, document.getElementById("dd").value || document.getElementById("dd").placeholder);
         });
         document.getElementById("bb").addEventListener("click", () => {
-            ploading.r(document.getElementById("dd").value);
+            ploading.r(document.getElementById("dd").value || document.getElementById("dd").placeholder);
         });
     </script>
 </body>
