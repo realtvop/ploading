@@ -18,7 +18,7 @@ const ploading = {
     init(callbacks) {
         this.canvas = document.createElement("canvas");
         this.ctx = this.canvas.getContext("2d");
-        this.canvas.style = "background-color: rgb(255, 255, 255);opacity: 1;position: fixed;width: 100vw;height: 100vh;left: 0px;top: 0px;";
+        this.canvas.style = "background-color: rgb(255, 255, 255);opacity: 1;position: fixed;width: 100vw;height: 100vh;left: 0px;top: 0px;z-index:10000;";
 
         console.log(arguments)
         if (callbacks) {
