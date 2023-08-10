@@ -1,9 +1,12 @@
+/* PLoading by realtvop
+https://github.com/realtvop/ploading */
+
 const ploading = {
     currentId: null,
     lastOver: 0,
     delayed: null,
     msg: "",
-    // tip: null,
+    tip: "喵喵喵~",
     canvas: null,
     ctx: null,
     startTime: 0,
@@ -108,6 +111,11 @@ const ploading = {
         const hw = 20 + dxstxt / 2;
         ploading.ctx.fillRect(Math.sin(t / 20) < 0 ? Math.cos(t / 20) * hw + width / 2 : width / 2 - hw, height / 2 - 25, -Math.cos(t / 20) * hw + hw, 50);
         ploading.ctx.fillText(ploading.msg, width / 2, height / 2);
+
+        ploading.ctx.font = ("20px Exo");
+        ploading.ctx.textAlign = "left";
+        ploading.ctx.textBaseline = "bottom";
+        ploading.ctx.fillText("Tip:" + ploading.tip, 10, height - 10);
 
         requestAnimationFrame(ploading.qwq);
     },
