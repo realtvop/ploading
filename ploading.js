@@ -15,11 +15,16 @@ const ploading = {
     whenHide: () => "喵喵喵",
     fadeInCompleted: false,
     fadingOut: false,
-    init(canvas, whenShow, whenHide) {
-        this.canvas = canvas;
-        this.ctx = canvas.getContext("2d");
-        if (typeof whenShow === "function") this.whenShow = whenShow;
-        if (typeof whenHide === "function") this.whenHide = whenHide;
+    init(callbacks) {
+        this.canvas = document.createElement("canvas");
+        this.ctx = this.canvas.getContext("2d");
+        this.canvas.style = "background-color: rgb(255, 255, 255);opacity: 1;position: fixed;width: 100vw;height: 100vh;left: 0px;top: 0px;";
+
+        console.log(arguments)
+        if (callbacks) {
+            if (typeof callbacks.whenShow === "function") this.whenShow = callbacks.whenShow;
+            if (typeof callbacks.whenHide === "function") this.whenHide = callbacks.whenHide;
+        }
     },
     l(msg, id = 'default') {
         if (this.currentId) {
@@ -62,15 +67,21 @@ const ploading = {
         }
         this.showing = true;
         this.whenShow();
+        document.body.appendChild(this.canvas);
     },
     hide() {
         // this.showing = false;
         this.fadingOut = performance.now();
         this.fadeInCompleted = false;
-        this.whenHide();
+    },
+    resizeCanvas() {
+        const { innerWidth, innerHeight } = window;
+        this.canvas.width = innerWidth;
+        this.canvas.height = innerHeight;
     },
     qwq() {
         if (!ploading.showing || !ploading.canvas || !ploading.ctx) return;
+        ploading.resizeCanvas();
         const { height, width } = ploading.canvas;
         const now = performance.now();
         const t = (now - ploading.startTime) / 20;
@@ -101,6 +112,9 @@ const ploading = {
                 ploading.fadingOut = false;
                 ploading.showing = false;
                 ploading.canvas.style.opacity = 0;
+
+                document.body.removeChild(ploading.canvas);
+                ploading.whenHide();
             }
         }
 
